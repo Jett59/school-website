@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>Well Done!</title>
+    <script src="/helper.js"></script>
+
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+    <center>
+        <h1>You submitted the form!</h1>
+        <p>
+            This will reload in <em>10 seconds</em>.
+        </p>
+    </center>
+    <script>
+        async function init() {
+            await sleep(10000);
+            window.open("/index.html", "_self");
+        }
+        init();
+    </script>
+</body>
+
+</html>
