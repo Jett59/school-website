@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Code - Code Viewer</title>
+        <script src="/pages.js"></script>
+        <link rel="stylesheet" href="/style.css"/>
+
+        <script>
+            function exclusiveClicked() {
+                let exclusivecontent = document.getElementById('exclusivecontent');
+                let githubcontent = document.getElementById('githubcontent');
+                githubcontent.classList.add('hidden');
+                exclusivecontent.classList.remove('hidden');
+            }
+            function githubClicked() {
+                    let exclusivecontent = document.getElementById('exclusivecontent');
+                    let githubcontent = document.getElementById('githubcontent');
+                    githubcontent.classList.remove('hidden');
+                    exclusivecontent.classList.add('hidden');
+                }
+
+                function exclusiveContentSelect() {
+                    let exclusivecontentoutput = document.getElementById('exclusivecontentoutput');
+                    let exclusivecontentselectionbox = document.getElementById('exclusivecontentselectionbox');
+                    fetch('/code/'+exclusivecontentselectionbox.value).then(msg=>msg.text()).then(code=> {
+                        exclusivecontentoutput.innerText = code;
+                    });
+                    return false;
+                }
+                function githubContentSelect() {
+                    let ownerBox = document.getElementById('githubowner');
+                    let repoBox = document.getElementById('githubrepo');
+                    let branchBox = document.getElementById('githubbranch');
+                    let pathBox = document.getElementById('githubpath');
+                    let outputBox = document.getElementById('githuboutputbox');
+                    fetch('https://raw.githubusercontent.com/'+ownerBox.value+'/'+repoBox.value+'/'+branchBox.value+'/'+pathBox.value).then(msg=>msg.text()).then(code=> {
+                        outputBox.innerText = code;
+                    });
+                    return false;
+                }
+            </script>
+    </head>
+    <body>
+        <navigation></navigation>
+        <main id="maincontent">
+            <h1>Code Viewer</h1>
+            <button onclick="exclusiveClicked()">Exclusive Content</button>
+            <button onclick="githubClicked()">Github Content</button>
+            <div id="exclusivecontent" class="hidden">
+                <form onsubmit="return exclusiveContentSelect()">
+                    <input type="text" placeholder="hello/hello.js" id="exclusivecontentselectionbox" REQUIRED="TRUE"/>
+                    <button type="submit">Go</button>
+                </form>
+                <p id="exclusivecontentoutput" class="codebox"></p>
+            </div>
+            <div id="githubcontent" class="hidden">
+                <FORM onsubmit="return githubContentSelect()">
+                    <input type="text" id="githubowner" required="true"/>
+                    <br/>
+                    <input type="text" id="githubrepo" required="true"/>
+                    <br/>
+                    <input type="text" id="githubbranch" required=""true"/>
+                    <br/>
+                    <input type="text" id="githubpath" required="true"/>
+                    <br/>
+                    <button type="submit">Go</button>
+                </FORM>
+                <p id="githuboutputbox"></p>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
+</html>
