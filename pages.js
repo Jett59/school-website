@@ -10,9 +10,6 @@ function loadNav() {
             <td>
                 <a href="/viewer.html">Code</a>
             </td>
-            <td>
-                <a href="/about.html">About</a>
-            </td>
             </tr>
         </table>
     </nav>
