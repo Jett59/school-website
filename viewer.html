@@ -5,6 +5,7 @@
     <script src="/pages.js"></script>
     <link rel="stylesheet" href="/style.css" />
 
+    <script src="github.js"></script>
     <script>
         function exclusiveClicked() {
             let exclusivecontent = document.getElementById('exclusivecontent');
@@ -25,18 +26,6 @@
             fetch('/code/' + exclusivecontentselectionbox.value).then(msg => msg.text()).then(code => {
                 exclusivecontentoutput.innerText = code;
             });
-            return false;
-        }
-        function githubContentSelect() {
-            let ownerBox = document.getElementById('githubowner');
-            let repoBox = document.getElementById('githubrepo');
-            let branchBox = document.getElementById('githubbranch');
-            let pathBox = document.getElementById('githubpath');
-            let outputBox = document.getElementById('githuboutputbox');
-            fetch('https://raw.githubusercontent.com/' + ownerBox.value + '/' + repoBox.value + '/' + branchBox.value + '/' + pathBox.value).then(msg => msg.text()).then(code => {
-                outputBox.innerText = code;
-            });
-            return false;
         }
     </script>
 </head>
@@ -48,7 +37,7 @@
         <button onclick="exclusiveClicked()">Exclusive Content</button>
         <button onclick="githubClicked()">Github Content</button>
         <div id="exclusivecontent" class="hidden">
-            <form onsubmit="return exclusiveContentSelect()">
+            <form onsubmit="exclusiveContentSelect(); return false">
                 <label for="exclusivecontentselectionbox">Path</label>
                 <input type="text" id="exclusivecontentselectionbox" REQUIRED="TRUE" />
                 <button type="submit">Go</button>
@@ -56,22 +45,16 @@
             <p id="exclusivecontentoutput" class="codebox"></p>
         </div>
         <div id="githubcontent" class="hidden">
-            <FORM onsubmit="return githubContentSelect()">
+            <FORM onsubmit="githubContentSelect(); return false">
                 <label for="githubowner">Owner</label>
                 <input type="text" id="githubowner" required="true" />
                 <br />
                 <label for="githubrepo">Repository</label>
                 <input type="text" id="githubrepo" required="true" />
                 <br />
-                <label for="githubbranch">Branch</label>
-                <input type="text" id="githubbranch" required="" true" />
-                <br />
-                <label for="githubpath">Path</label>
-                <input type="text" id="githubpath" required="true" />
-                <br />
                 <button type="submit">Go</button>
             </FORM>
-            <p id="githuboutputbox"></p>
+            <div id="githuboutputbox"></div>
         </div>
     </main>
     <footer></footer>

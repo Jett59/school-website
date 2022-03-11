@@ -28,3 +28,7 @@ nav>table>tr {
     display: none;
     visibility: hidden;
 }
+
+.unstyled-list {
+    list-style: none;
+}
