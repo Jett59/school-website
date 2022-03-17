@@ -6,26 +6,20 @@
     <link rel="stylesheet" href="/style.css" />
 
     <script src="github.js"></script>
+    <script src="exclusive.js"></script>
     <script>
         function exclusiveClicked() {
             let exclusivecontent = document.getElementById('exclusivecontent');
             let githubcontent = document.getElementById('githubcontent');
             githubcontent.classList.add('hidden');
             exclusivecontent.classList.remove('hidden');
+            exclusiveContentCreate(exclusivecontent);
         }
         function githubClicked() {
             let exclusivecontent = document.getElementById('exclusivecontent');
             let githubcontent = document.getElementById('githubcontent');
             githubcontent.classList.remove('hidden');
             exclusivecontent.classList.add('hidden');
-        }
-
-        function exclusiveContentSelect() {
-            let exclusivecontentoutput = document.getElementById('exclusivecontentoutput');
-            let exclusivecontentselectionbox = document.getElementById('exclusivecontentselectionbox');
-            fetch('/code/' + exclusivecontentselectionbox.value).then(msg => msg.text()).then(code => {
-                exclusivecontentoutput.innerText = code;
-            });
         }
     </script>
 </head>
@@ -36,14 +30,7 @@
         <h1>Code Viewer</h1>
         <button onclick="exclusiveClicked()">Exclusive Content</button>
         <button onclick="githubClicked()">Github Content</button>
-        <div id="exclusivecontent" class="hidden">
-            <form onsubmit="exclusiveContentSelect(); return false">
-                <label for="exclusivecontentselectionbox">Path</label>
-                <input type="text" id="exclusivecontentselectionbox" REQUIRED="TRUE" />
-                <button type="submit">Go</button>
-            </form>
-            <p id="exclusivecontentoutput" class="codebox"></p>
-        </div>
+        <div id="exclusivecontent" class="hidden"></div>
         <div id="githubcontent" class="hidden">
             <FORM onsubmit="githubContentSelect(); return false">
                 <label for="githubowner">Owner</label>
