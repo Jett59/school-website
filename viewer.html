@@ -2,17 +2,23 @@
 
 <head>
     <title>Code - Code Viewer</title>
-    <script src="/pages.js"></script>
-    <link rel="stylesheet" href="/style.css" />
+    <script src="pages.js"></script>
+    <link rel="stylesheet" href="style.css"/>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/dark.min.css">
+
+<script src="back.js"></script>
     <script src="github.js"></script>
     <script src="exclusive.js"></script>
     <script>
+        hljs.debugMode();
         function exclusiveClicked() {
             let exclusivecontent = document.getElementById('exclusivecontent');
             let githubcontent = document.getElementById('githubcontent');
             githubcontent.classList.add('hidden');
             exclusivecontent.classList.remove('hidden');
+            resetBackButton();
             exclusiveContentCreate(exclusivecontent);
         }
         function githubClicked() {
@@ -20,6 +26,11 @@
             let githubcontent = document.getElementById('githubcontent');
             githubcontent.classList.remove('hidden');
             exclusivecontent.classList.add('hidden');
+            resetBackButton();
+        }
+
+        function highlightCode(codeBlock) {
+            hljs.highlightBlock(codeBlock);
         }
     </script>
 </head>

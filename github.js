@@ -28,25 +28,36 @@ function getOutputBox() {
 
 function createBranchSelection(branches) {
     let outputBox = getOutputBox();
-    let outputHTML = `<ul class="unstyled-list">`;
+    let outputHTML = backButtonCode(outputBox.id);
+    outputHTML += `<ul class="unstyled-list">`;
     for (var branch of branches) {
         outputHTML += `<li><button onclick="selectBranch('${branch.commit.url}')">${branch.name}</button></li>`;
     }
     outputHTML += `</ul>`;
     outputBox.innerHTML = outputHTML;
+    pushPage(outputHTML);
 }
 
 function loadTree(tree) {
     let outputBox = getOutputBox();
-    let outputHTML = `<ul class="unstyled-list">`;
+    let outputHTML = backButtonCode(outputBox.id);
+    outputHTML += `<ul class="unstyled-list">`;
     for (var treeItem of tree.tree) {
         outputHTML += `<li><button onclick="selectPath('${treeItem.url}', '${treeItem.type}')">${treeItem.path}</button></li>`;
     }
     outputHTML += `</ul>`;
     outputBox.innerHTML = outputHTML;
+    pushPage(outputHTML);
 }
 
 function loadBlob(blob) {
     let outputBox = getOutputBox();
-    outputBox.innerText = blob;
+    let codeBox = document.createElement('code');
+    codeBox.innerText = blob;
+    let preBox = document.createElement('pre');
+    preBox.appendChild(codeBox);
+    outputBox.innerHTML = backButtonCode(outputBox.id);
+    outputBox.appendChild(preBox);
+    highlightCode(preBox);
+    pushPage(outputBox.innerHTML);
 }

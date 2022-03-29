@@ -5,10 +5,10 @@ function loadNav() {
         <table>
             <tr>
             <td>
-                <a href="/index.html">Home</a>
+                <a href="index.html">Home</a>
             </td>
             <td>
-                <a href="/viewer.html">Code</a>
+                <a href="viewer.html">Code</a>
             </td>
             </tr>
         </table>
