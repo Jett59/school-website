@@ -3,12 +3,12 @@
 <head>
     <title>Code - Code Viewer</title>
     <script src="pages.js"></script>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/dark.min.css">
 
-<script src="back.js"></script>
+    <script src="back.js"></script>
     <script src="github.js"></script>
     <script src="exclusive.js"></script>
     <script>
@@ -26,6 +26,8 @@
             let githubcontent = document.getElementById('githubcontent');
             githubcontent.classList.remove('hidden');
             exclusivecontent.classList.add('hidden');
+            let outputBox = document.getElementById('githuboutputbox');
+            outputBox.innerHTML = ``;
             resetBackButton();
         }
 

@@ -21,5 +21,5 @@ function resetBackButton() {
 }
 
 function backButtonCode(outputBoxId) {
-    return `<button onclick="goBack('${outputBoxId}')">Back</button>`
+    return `<button onclick="goBack('${outputBoxId}')">&larr; Back</button>`
 }
