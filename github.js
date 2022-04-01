@@ -1,14 +1,18 @@
 window.addEventListener('load', attachGithubContentListeners);
 
+let avatarDebouncer = debounce();
+
 function attachGithubContentListeners() {
     let ownerBox = document.getElementById('githubowner');
     let avatarBox = document.getElementById('githubavatar');
     ownerBox.addEventListener('input', event => {
-        let username = ownerBox.value;
-        avatarBox.innerHTML = ``;
-        if (username != undefined && username !== '') {
-            loadAvatar(username, avatarBox);
-        }
+        avatarDebouncer(() => {
+            let username = ownerBox.value;
+            avatarBox.innerHTML = ``;
+            if (username != undefined && username !== '') {
+                loadAvatar(username, avatarBox);
+            }
+        });
     });
 }
 
