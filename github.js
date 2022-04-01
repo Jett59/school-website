@@ -1,5 +1,28 @@
+window.addEventListener('load', attachGithubContentListeners);
+
+function attachGithubContentListeners() {
+    let ownerBox = document.getElementById('githubowner');
+    let avatarBox = document.getElementById('githubavatar');
+    ownerBox.addEventListener('input', event => {
+        let username = ownerBox.value;
+        avatarBox.innerHTML = ``;
+        if (username != undefined && username !== '') {
+            loadAvatar(username, avatarBox);
+        }
+    });
+}
+
 function apiFetch(url, callback) {
     fetch(url).then(msg => msg.text()).then(txt => JSON.parse(txt)).then(callback);
+}
+
+function loadAvatar(username, avatarBox) {
+    apiFetch(`https://api.github.com/users/${username}`, msg => {
+        if (msg.avatar_url != undefined) {
+            avatarBox.innerHTML = `<img id="avatar-image" src="${msg.avatar_url
+                } "/>`;
+        }
+    });
 }
 
 function githubContentSelect() {

@@ -36,3 +36,22 @@ nav>table>tr {
 .unstyled-list {
     list-style: none;
 }
+
+#githubavatar {
+    flex: 1;
+}
+
+.flex-row {
+    display: flex;
+}
+#owner-box {
+    flex: none;
+}
+
+#owner-boxes>div {
+    max-height: 25px;
+}
+
+#avatar-image {
+    max-height: inherit;
+}

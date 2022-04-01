@@ -46,9 +46,13 @@
         <div id="exclusivecontent" class="hidden"></div>
         <div id="githubcontent" class="hidden">
             <FORM onsubmit="githubContentSelect(); return false">
+                <div class="flex-row" id="owner-boxes">
+                    <div id="owner-box">
                 <label for="githubowner">Owner</label>
                 <input type="text" id="githubowner" required="true" />
-                <br />
+                </div>
+                <div id="githubavatar" aria-hidden="true"></div>
+                </div>
                 <label for="githubrepo">Repository</label>
                 <input type="text" id="githubrepo" required="true" />
                 <br />

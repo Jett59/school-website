@@ -30,7 +30,7 @@ function loadFooter() {
     }
 }
 
-window.onload = function () {
+window.addEventListener('load', function () {
     loadNav();
     loadFooter();
-}
+});
