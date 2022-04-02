@@ -16,23 +16,27 @@ function attachGithubContentListeners() {
     });
 }
 
-function apiFetch(url, callback) {
-    fetch(url).then(msg => msg.text()).then(txt => JSON.parse(txt)).then(callback);
+function apiFetch(url, essential=true, callback) {
+    fetch(url).then(msg => msg.text()).then(txt => JSON.parse(txt)).then(msg => {
+        if (msg.message != undefined && essential) {
+            alert(msg.message);
+        }
+        callback(msg);
+    });
 }
 
 function loadAvatar(username, avatarBox) {
-    apiFetch(`https://api.github.com/users/${username}`, msg => {
+    apiFetch(`https://api.github.com/users/${username}`, false, msg => {
         if (msg.avatar_url != undefined) {
-            avatarBox.innerHTML = `<img id="avatar-image" src="${msg.avatar_url
-                } "/>`;
-        }
+            avatarBox.innerHTML = `<img id="avatar-image" src="${msg.avatar_url}"/>`;
+                }
     });
 }
 
 function githubContentSelect() {
     let ownerBox = document.getElementById('githubowner');
     let repoBox = document.getElementById('githubrepo');
-    apiFetch('https://api.github.com/repos/' + ownerBox.value + '/' + repoBox.value + '/branches', createBranchSelection);
+    apiFetch(`https://api.github.com/repos/${ownerBox.value}/${repoBox.value}/branches`, createBranchSelection);
 }
 
 function selectBranch(commitUrl) {
