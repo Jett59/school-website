@@ -16,7 +16,7 @@ function attachGithubContentListeners() {
     });
 }
 
-function apiFetch(url, essential=true, callback) {
+function apiFetch(url, essential, callback) {
     fetch(url).then(msg => msg.text()).then(txt => JSON.parse(txt)).then(msg => {
         if (msg.message != undefined && essential) {
             alert(msg.message);
@@ -29,22 +29,22 @@ function loadAvatar(username, avatarBox) {
     apiFetch(`https://api.github.com/users/${username}`, false, msg => {
         if (msg.avatar_url != undefined) {
             avatarBox.innerHTML = `<img id="avatar-image" src="${msg.avatar_url}"/>`;
-                }
+        }
     });
 }
 
 function githubContentSelect() {
     let ownerBox = document.getElementById('githubowner');
     let repoBox = document.getElementById('githubrepo');
-    apiFetch(`https://api.github.com/repos/${ownerBox.value}/${repoBox.value}/branches`, createBranchSelection);
+    apiFetch(`https://api.github.com/repos/${ownerBox.value}/${repoBox.value}/branches`, true, createBranchSelection);
 }
 
 function selectBranch(commitUrl) {
-    apiFetch(commitUrl, commit => apiFetch(commit.commit.tree.url, loadTree));
+    apiFetch(commitUrl, true, commit => apiFetch(commit.commit.tree.url, true, loadTree));
 }
 
 function selectPath(url, type) {
-    apiFetch(url, item => {
+    apiFetch(url, true, item => {
         if (type === 'blob') {
             loadBlob(atob(item.content));
         } else if (type === 'tree') {
